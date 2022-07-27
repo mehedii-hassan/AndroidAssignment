@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PhotoModel {
+public class ImageModel {
 
     @SerializedName("id")
     @Expose
@@ -64,6 +64,10 @@ public class PhotoModel {
     @SerializedName("user")
     @Expose
     private User user;
+
+    public ImageModel(Urls urls) {
+        this.urls = urls;
+    }
 
     public String getId() {
         return id;

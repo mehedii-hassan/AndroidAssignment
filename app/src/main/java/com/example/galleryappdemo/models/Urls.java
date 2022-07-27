@@ -25,6 +25,10 @@ public class Urls {
     @Expose
     private String smallS3;
 
+    public Urls(String regular) {
+        this.regular = regular;
+    }
+
     public String getRaw() {
         return raw;
     }
