@@ -1,9 +1,7 @@
 package com.example.galleryappdemo.adapters;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -19,34 +17,30 @@ import java.util.List;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
     private List<ImageModel> imageList;
-    Context context;
-    public ImageAdapter(Context context, List<ImageModel> imageList) {
-        this.imageList=imageList;
-        this.context=context;
+
+    public ImageAdapter() {
+        imageList = new ArrayList<>();
     }
 
     @NonNull
     @Override
     public ImageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         ImageRowDesignBinding binding = ImageRowDesignBinding
-                .inflate(LayoutInflater.from(parent.getContext()),parent,false);
+                .inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ImageViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-       // int pos = position;
+        // int pos = position;
         Picasso.get().load(imageList.get(position).getUrls()
-                        .getRegular()).into(holder.binding.ivRowDesign);
+                .getRegular()).into(holder.binding.ivRowDesign);
 
-        holder.binding.ivRowDesign.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), FullImageActivity.class);
-                intent.putExtra("image",imageList.get(position).getUrls().getRegular());
-                v.getContext().startActivity(intent);
+        holder.binding.ivRowDesign.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), FullImageActivity.class);
+            intent.putExtra("image", imageList.get(position).getUrls().getRegular());
+            v.getContext().startActivity(intent);
 
-            }
         });
 
 
@@ -65,9 +59,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     class ImageViewHolder extends RecyclerView.ViewHolder {
         private ImageRowDesignBinding binding;
+
         public ImageViewHolder(ImageRowDesignBinding binding) {
             super(binding.getRoot());
-            this.binding =binding;
+            this.binding = binding;
         }
     }
 }
